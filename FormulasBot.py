@@ -7,14 +7,18 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 from PIL import Image
+import urllib
+from urllib.request import urlopen
 
 
 import random
+import io
+from io import BytesIO
 
 from UserData import User_Data as UD
 import markups as marks
 from SubjectFormulas import dict_physics, dict_chem
-from settings import TOKEN, API_URL
+from settings import TOKEN
 
 storage = MemoryStorage()
 
@@ -70,25 +74,28 @@ def get_physics_picture(call):
 
     # --- Caption - вопрос из списка ---
     caption = list_dict_physics[random.randint(0, len(dict_physics) - 1)]
-    formula_correct_answer = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/физика/' + dict_physics.get(caption))
+    formula_correct_answer = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption)))
     image.paste(formula_correct_answer, (150, list_y_pos[0]), formula_correct_answer)
 
     caption_2 = list_dict_physics.pop(list_dict_physics.index(caption))
     caption_2 = list_dict_physics[random.randint(0, len(dict_physics) - 2)]
-    formula_2 = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/физика/' + dict_physics.get(caption_2))
+    formula_2 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption_2)))
     image.paste(formula_2, (150, list_y_pos[1]), formula_2)
 
     caption_3 = list_dict_physics.pop(list_dict_physics.index(caption_2), )
     caption_3 = list_dict_physics[random.randint(0, len(dict_physics) - 3)]
-    formula_3 = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/физика/' + dict_physics.get(caption_3))
+    formula_3 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption_3)))
     image.paste(formula_3, (150, list_y_pos[2]), formula_3)
 
     caption_4 = list_dict_physics.pop(list_dict_physics.index(caption_3))
     caption_4 = list_dict_physics[random.randint(0, len(dict_physics) - 4)]
-    formula_4 = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/физика/' + dict_physics.get(caption_4))
+    formula_4 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption_4)))
     image.paste(formula_4, (150, list_y_pos[3]), formula_4)
 
-    image.save('C:/Users/mcduc/OneDrive/Рабочий стол/newpick.png')
+    picture = io.BytesIO()
+    image.save(picture, format='PNG')
+    global photo_png
+    photo_png = picture.getvalue()
 
 # --- Функция генерации картинки по ХИМИИ ---
 def get_chem_picture(call):
@@ -116,25 +123,28 @@ def get_chem_picture(call):
 
     # --- Caption - вопрос из списка ---
     caption = list_dict_chem[random.randint(0, len(list_dict_chem) - 1)]
-    formula_correct_answer = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/химия/' + dict_chem.get(caption))
+    formula_correct_answer = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption)))
     image.paste(formula_correct_answer, (150, list_y_pos[0]), formula_correct_answer)
 
     caption_2 = list_dict_chem.pop(list_dict_chem.index(caption))
     caption_2 = list_dict_chem[random.randint(0, len(dict_chem) - 2)]
-    formula_2 = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/химия/' + dict_chem.get(caption_2))
+    formula_2 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption_2)))
     image.paste(formula_2, (150, list_y_pos[1]), formula_2)
 
     caption_3 = list_dict_chem.pop(list_dict_chem.index(caption_2), )
     caption_3 = list_dict_chem[random.randint(0, len(dict_chem) - 3)]
-    formula_3 = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/химия/' + dict_chem.get(caption_3))
+    formula_3 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption_3)))
     image.paste(formula_3, (150, list_y_pos[2]), formula_3)
 
     caption_4 = list_dict_chem.pop(list_dict_chem.index(caption_3))
     caption_4 = list_dict_chem[random.randint(0, len(dict_chem) - 4)]
-    formula_4 = Image.open('C:/Users/mcduc/OneDrive/Рабочий стол/химия/' + dict_chem.get(caption_4))
+    formula_4 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption_4)))
     image.paste(formula_4, (150, list_y_pos[3]), formula_4)
 
-    image.save('C:/Users/mcduc/OneDrive/Рабочий стол/newpick.png')
+    picture = io.BytesIO()
+    image.save(picture, format='PNG')
+    global photo_png
+    photo_png = picture.getvalue()
 
 # --- Проверка ответа по ФИЗИКЕ ---
 @dp.message_handler(state=FSM_subject_phys.answer_phys)
@@ -163,9 +173,8 @@ async def check_answers(message: types.Message, state: FSMContext):
         await bot.send_message(message.from_user.id, 'Верный ответ: '+str(UD.get(message.from_user.id)))
         await bot.send_message(message.from_user.id, 'Чего желаете?', reply_markup=marks.Inline_after_answer_phys)
     else:
-        await bot.send_message(message.from_user.id,
-                               'Неверно', reply_markup=marks.Inline_after_answer_phys
-                               )
+        await bot.send_message(message.from_user.id, 'Неправильно!\nВерный ответ: '+str(UD.get(message.from_user.id)), reply_markup=marks.Inline_after_answer_phys)
+
     await state.finish()
 
 # --- Проверка ответа по ХИМИИ ---
@@ -186,17 +195,32 @@ async def check_answers(message: types.Message, state: FSMContext):
         elif data['answer_chem'] == 'Показать ответ':
             y = 'Показать ответ'
     if y == UD.get(message.from_user.id):
-        await bot.send_message(message.from_user.id, 'Правильно!', reply_markup=marks.Inline_after_answer_chem
+        await bot.send_message(message.from_user.id,
+                               'Правильно!',
+                               reply_markup=marks.Inline_after_answer_chem
                                )
+
     elif y == 'Отмена':
-        await bot.send_message(message.from_user.id, 'Отменил действие', reply_markup=types.ReplyKeyboardRemove())
-        await bot.send_message(message.from_user.id, 'Выберите предмет:', reply_markup=get_Choose_Subject_Menu())
+        await bot.send_message(message.from_user.id,
+                               'Отменил действие', reply_markup=types.ReplyKeyboardRemove()
+                               )
+        await bot.send_message(message.from_user.id,
+                               'Выберите предмет:',
+                               reply_markup=get_Choose_Subject_Menu()
+                               )
+
     elif y == 'Показать ответ':
-        await bot.send_message(message.from_user.id, 'Верный ответ: '+str(UD.get(message.from_user.id)))
-        await bot.send_message(message.from_user.id, 'Чего желаете?', reply_markup=marks.Inline_after_answer_chem)
+        await bot.send_message(message.from_user.id,
+                               'Верный ответ: '+str(UD.get(message.from_user.id))
+                               )
+        await bot.send_message(message.from_user.id,
+                               'Чего желаете?',
+                               reply_markup=marks.Inline_after_answer_chem
+                               )
     else:
         await bot.send_message(message.from_user.id,
-                               'Неверно', reply_markup=marks.Inline_after_answer_chem
+                               'Неправильно!\nВерный ответ: '+str(UD.get(message.from_user.id)),
+                               reply_markup=marks.Inline_after_answer_chem
                                )
     await state.finish()
 
@@ -236,9 +260,8 @@ async def Menu_commands(call: types.callback_query):
         await FSM_subject_phys.answer_phys.set()
         await call.message.answer('Выберите вариант ответа')
 
-        with open('C:/Users/mcduc/OneDrive/Рабочий стол/newpick.png', 'rb') as photo:
-            await bot.send_photo(call.from_user.id, photo, caption, reply_markup=marks.Answers_choose)
-            await bot.delete_message(call.from_user.id, call.message.message_id)
+        await bot.send_photo(call.from_user.id, photo_png, caption, reply_markup=marks.Answers_choose)
+        await bot.delete_message(call.from_user.id, call.message.message_id)
 
     elif call.data == 'Химия':
         get_chem_picture(call)
@@ -246,9 +269,8 @@ async def Menu_commands(call: types.callback_query):
         await FSM_subject_chem.answer_chem.set()
         await call.message.answer('Выберите вариант ответа')
 
-        with open('C:/Users/mcduc/OneDrive/Рабочий стол/newpick.png', 'rb') as photo:
-            await bot.send_photo(call.from_user.id, photo, caption, reply_markup=marks.Answers_choose)
-            await bot.delete_message(call.from_user.id, call.message.message_id)
+        await bot.send_photo(call.from_user.id, photo_png, caption, reply_markup=marks.Answers_choose)
+        await bot.delete_message(call.from_user.id, call.message.message_id)
 
 
 if __name__ == '__main__':
