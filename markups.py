@@ -2,27 +2,6 @@ from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
 
-'''# --- Back to the Main Menu ---
-btn_Main_Menu = KeyboardButton('Главное меню')
-
-# --- Main Menu Buttons ---
-btn_choose_subject = KeyboardButton('Выбрать предмет')
-btn_other_menu = KeyboardButton('Другое')
-
-Main_Menu = ReplyKeyboardMarkup(resize_keyboard=True).add(btn_choose_subject).add(btn_other_menu)
-
-# --- Other Menu Buttons ---
-btn_how_answer = KeyboardButton('Как пользоваться?')
-btn_write_dev = KeyboardButton('Связь с разработчиком')
-
-Other_Menu = ReplyKeyboardMarkup(resize_keyboard=True).add(btn_how_answer).row(btn_write_dev, btn_Main_Menu)
-
-# --- Choose Subject Buttons Menu ---
-btn_choose_physics = KeyboardButton('Физика')
-btn_choose_math = KeyboardButton('Математика')
-
-Choose_subject = ReplyKeyboardMarkup(resize_keyboard=True).add(btn_choose_physics, btn_choose_math).add(btn_Main_Menu)'''
-
 # --- Back to the Main Menu ---
 inline_btn_back_to_the_Main_Menu = InlineKeyboardButton('Главное меню', callback_data='Главное меню')
 
