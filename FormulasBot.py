@@ -202,20 +202,20 @@ async def check_answers(message: types.Message, state: FSMContext):
             y = 3
         elif data['answer'] == '4️⃣':
             y = 4
-        elif data['answer'] == 'Отмена':
-            y = 'Отмена'
-        elif data['answer'] == 'Показать ответ':
-            y = 'Показать ответ'
+        elif data['answer'] == 'Отмена❌':
+            y = 'Отмена❌'
+        elif data['answer'] == 'Показать ответ✅':
+            y = 'Показать ответ✅'
     if y == UD.get(message.from_user.id):
         # Отправляем текстовое сообщение (Кому, Текст, Inline клавиатура)
         await bot.send_message(message.from_user.id,
-                               'Правильно!',
+                               'Правильно✅',
                                reply_markup=marks.Inline_after_answer_phys
                                )
-    elif y == 'Отмена':
+    elif y == 'Отмена❌':
         # Отправляем текстовое сообщение (Кому, Текст, убираем Reply клавиатуру)
         await bot.send_message(message.from_user.id,
-                               'Отменил действие',
+                               'Отменил действие🙅‍♂️',
                                reply_markup=types.ReplyKeyboardRemove()
                               )
         # Отправляем текстовое сообщение (Кому, Текст, Inline клавиатура)
@@ -223,19 +223,19 @@ async def check_answers(message: types.Message, state: FSMContext):
                                'Выберите предмет:',
                                reply_markup=get_Choose_Subject_Menu()
                               )
-    elif y == 'Показать ответ':
+    elif y == 'Показать ответ✅':
         # Отправляем текстовое сообщение (Кому, Текст (значение словаря по ключу id), Inline клавиатура)
         await bot.send_message(message.from_user.id,
                                'Верный ответ: '+str(UD.get(message.from_user.id))
                               )
         await bot.send_message(message.from_user.id,
-                               'Чего желаете?',
+                               'Чего желаете❓',
                                reply_markup=marks.Inline_after_answer_phys
                               )
     else:
         # Отправляем текстовое сообщение (Кому, Текст (значение словаря по ключу id), Inline клавиатура)
         await bot.send_message(message.from_user.id,
-                               'Неправильно!\nВерный ответ: '+str(UD.get(message.from_user.id)),
+                               'Неправильно❌\nВерный ответ: '+str(UD.get(message.from_user.id)),
                                reply_markup=marks.Inline_after_answer_phys
                               )
     # Выходим из режима FSM (+Очищение словаря)
@@ -254,36 +254,36 @@ async def check_answers(message: types.Message, state: FSMContext):
             y = 3
         elif data['answer'] == '4️⃣':
             y = 4
-        elif data['answer'] == 'Отмена':
-            y = 'Отмена'
-        elif data['answer'] == 'Показать ответ':
-            y = 'Показать ответ'
+        elif data['answer'] == 'Отмена❌':
+            y = 'Отмена❌'
+        elif data['answer'] == 'Показать ответ✅':
+            y = 'Показать ответ✅'
             
     if y == UD.get(message.from_user.id):
         await bot.send_message(message.from_user.id,
-                               'Правильно!',
+                               'Правильно✅',
                                reply_markup=marks.Inline_after_answer_chem
                                )
-    elif y == 'Отмена':
+    elif y == 'Отмена❌':
         await bot.send_message(message.from_user.id,
-                               'Отменил действие',
+                               'Отменил действие🙅‍♂️',
                                reply_markup=types.ReplyKeyboardRemove()
                                )
         await bot.send_message(message.from_user.id,
                                'Выберите предмет:',
                                reply_markup=get_Choose_Subject_Menu()
                                )
-    elif y == 'Показать ответ':
+    elif y == 'Показать ответ✅':
         await bot.send_message(message.from_user.id,
                                'Верный ответ: '+str(UD.get(message.from_user.id))
                                )
         await bot.send_message(message.from_user.id,
-                               'Чего желаете?',
+                               'Чего желаете❓',
                                reply_markup=marks.Inline_after_answer_chem
                                )
     else:
         await bot.send_message(message.from_user.id,
-                               'Неправильно!\nВерный ответ: '+str(UD.get(message.from_user.id)),
+                               'Неправильно❌\nВерный ответ: '+str(UD.get(message.from_user.id)),
                                reply_markup=marks.Inline_after_answer_chem
                                )
     await state.finish()
@@ -293,18 +293,18 @@ async def check_answers(message: types.Message, state: FSMContext):
 async def command_start(message: types.Message):
     if message.text == '/start':
         # Отправляем текстовое сообщение (Кому, Текст, Inline клавиатура)
-        await message.answer('Приветствую!\nЭтот бот проверяет знание формул!\nСкорее пробуй!',
+        await message.answer('Приветствую❗️\nЭтот Бот проверяет знание школьного материала\nСкорее пробуй🤖',
                            reply_markup=get_Main_Menu()
                         )
     elif message.text == '/help':
         # Отправляем текстовое сообщение (Кому, Текст)
-        await message.answer('Нажми ==> /start'
+        await message.answer('Нажми ➡️ /start'
                              )
 
 # --- Декоратор выхода из режима FSM при отправке "Отмена": ---
 # Аргументы: Конкретное текстовое сообщение, * выход из любого состояния
 # В коде всего одно состояние, но это необходимо для дальнейшей реализации проекта
-@dp.message_handler(content_types = 'Отмена', state="*")
+@dp.message_handler(content_types = 'Отмена❌', state="*")
 async def cancel_handler(message: types.Message, state: FSMContext):
     await state.finish()
 
@@ -319,7 +319,7 @@ async def Menu_commands(call: types.callback_query):
     if call.data == 'Главное меню':
         # Отправляем текстовое сообщение (Кому, Текст, Inline клавиатура Главного Меню)
         await bot.send_message(call.from_user.id,
-                               'Кликайте, не стесняйтесь :)',
+                               'Кликайте, не стесняйтесь 🤖',
                                reply_markup=get_Main_Menu()
                               )
     elif call.data == 'Выбрать предмет':
@@ -331,13 +331,13 @@ async def Menu_commands(call: types.callback_query):
     elif call.data == 'Прочее':
         # Отправляем текстовое сообщение (Кому, Текст, Inline клавиатура Меню "Прочее")
         await bot.send_message(call.from_user.id,
-                               'Чего желаете?',
+                               'Чего желаете❓',
                                reply_markup=get_Other_Menu()
                               )
     elif call.data == 'Отмена':
         # Отправляем текстовое сообщение (Кому, Текст, убираем Reply клавиатуру)
         await bot.send_message(call.from_user.id,
-                               'Действие отменено',
+                               'Действие отменено🙅‍♂️',
                                reply_markup=types.ReplyKeyboardRemove()
                               )
         
