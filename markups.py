@@ -6,16 +6,16 @@ from aiogram.types import ReplyKeyboardRemove, \
 
 # --- Inline клавиатуры и кнопки: ---
 # Кнопка Главного Меню
-inline_btn_back_to_the_Main_Menu = InlineKeyboardButton('Главное меню',
+inline_btn_back_to_the_Main_Menu = InlineKeyboardButton('◀️Главное меню',
                                                         callback_data='Главное меню'
                                                         )
 
 
 # Кнопки Главного Меню
-inline_btn_choose_subject = InlineKeyboardButton('Выбрать предмет',
+inline_btn_choose_subject = InlineKeyboardButton('Выбрать предмет📚',
                                                  callback_data='Выбрать предмет'
                                                  )
-inline_btn_other_menu = InlineKeyboardButton('Прочее',
+inline_btn_other_menu = InlineKeyboardButton('Прочее📌',
                                              callback_data='Прочее'
                                              )
 # Клавиатура Главного Меню
@@ -25,11 +25,11 @@ Inline_Main_Menu = InlineKeyboardMarkup(row_width=1).add(inline_btn_choose_subje
 
 
 # Кнопка Предмета Физики
-inline_btn_choose_physics = InlineKeyboardButton('Физика',
+inline_btn_choose_physics = InlineKeyboardButton('Физика🧲',
                                                  callback_data='Физика'
                                                  )
 # Кнопка Предмета Химии
-inline_btn_choose_math = InlineKeyboardButton('Химия',
+inline_btn_choose_math = InlineKeyboardButton('Химия🧪',
                                               callback_data='Химия'
                                               )
 # Клавиатура Меню Выбора Предметов
@@ -40,10 +40,10 @@ Inline_Choose_Subject_Menu = InlineKeyboardMarkup(row_width=1).add(inline_btn_ch
 
 
 # Кнопки Вариантов развития (Физика)
-inline_btn_cancel = InlineKeyboardButton('Отмена',
+inline_btn_cancel = InlineKeyboardButton('Отмена❌',
                                          callback_data='Отмена'
                                          )
-inline_btn_more_physics = InlineKeyboardButton('Ещё картинку!',
+inline_btn_more_physics = InlineKeyboardButton('Ещё Вопрос🖼',
                                                callback_data='Физика'
                                                )
 # Клавиатура Вариантов развития (Физика)
@@ -51,7 +51,7 @@ Inline_after_answer_phys = InlineKeyboardMarkup(resize_keyboard=True).add(inline
 
 
 # Кнопки Вариантов развития (Химия)
-inline_btn_more_chem = InlineKeyboardButton('Ещё картинку!',
+inline_btn_more_chem = InlineKeyboardButton('Ещё Вопрос🖼',
                                             callback_data='Химия'
                                             )
 
@@ -60,7 +60,7 @@ Inline_after_answer_chem = InlineKeyboardMarkup(resize_keyboard=True).add(inline
 
 
 # Кнопка Меню "Прочее"
-inline_write_dev = InlineKeyboardButton('Связь с разработчиком',
+inline_write_dev = InlineKeyboardButton('Связь с разработчиком📲',
                                         url='https://vk.com/mcduck74'
                                         )
 # Клавиатура Меню "Прочее"
@@ -75,8 +75,8 @@ btn_answer_1 = KeyboardButton('1️⃣')
 btn_answer_2 = KeyboardButton('2️⃣')
 btn_answer_3 = KeyboardButton('3️⃣')
 btn_answer_4 = KeyboardButton('4️⃣')
-btn_cancel = KeyboardButton('Отмена')
-btn_show_correct_answer = KeyboardButton('Показать ответ')
+btn_cancel = KeyboardButton('Отмена❌')
+btn_show_correct_answer = KeyboardButton('Показать ответ✅')
 # Reply Клавиатура Ответов
 Answers_choose = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(btn_answer_1,
                                                                                        btn_answer_2,
