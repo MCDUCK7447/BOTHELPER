@@ -123,22 +123,22 @@ def get_chem_picture(call):
 
     # --- Caption - вопрос из списка ---
     caption = list_dict_chem[random.randint(0, len(list_dict_chem) - 1)]
-    formula_correct_answer = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption)))
+    formula_correct_answer = Image.open(dict_chem.get(caption))
     image.paste(formula_correct_answer, (150, list_y_pos[0]), formula_correct_answer)
 
     caption_2 = list_dict_chem.pop(list_dict_chem.index(caption))
     caption_2 = list_dict_chem[random.randint(0, len(dict_chem) - 2)]
-    formula_2 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption_2)))
+    formula_2 = Image.open(dict_chem.get(caption_2))
     image.paste(formula_2, (150, list_y_pos[1]), formula_2)
 
     caption_3 = list_dict_chem.pop(list_dict_chem.index(caption_2), )
     caption_3 = list_dict_chem[random.randint(0, len(dict_chem) - 3)]
-    formula_3 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption_3)))
+    formula_3 = Image.open(dict_chem.get(caption_3))
     image.paste(formula_3, (150, list_y_pos[2]), formula_3)
 
     caption_4 = list_dict_chem.pop(list_dict_chem.index(caption_3))
     caption_4 = list_dict_chem[random.randint(0, len(dict_chem) - 4)]
-    formula_4 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%85%D0%B8%D0%BC%D0%B8%D1%8F/' + dict_chem.get(caption_4)))
+    formula_4 = Image.open(dict_chem.get(caption_4))
     image.paste(formula_4, (150, list_y_pos[3]), formula_4)
 
     picture = io.BytesIO()
