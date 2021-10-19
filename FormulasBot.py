@@ -74,22 +74,22 @@ def get_physics_picture(call):
 
     # --- Caption - вопрос из списка ---
     caption = list_dict_physics[random.randint(0, len(dict_physics) - 1)]
-    formula_correct_answer = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption)))
+    formula_correct_answer = Image.open(dict_physics.get(caption))
     image.paste(formula_correct_answer, (150, list_y_pos[0]), formula_correct_answer)
 
     caption_2 = list_dict_physics.pop(list_dict_physics.index(caption))
     caption_2 = list_dict_physics[random.randint(0, len(dict_physics) - 2)]
-    formula_2 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption_2)))
+    formula_2 = Image.open(dict_physics.get(caption_2))
     image.paste(formula_2, (150, list_y_pos[1]), formula_2)
 
     caption_3 = list_dict_physics.pop(list_dict_physics.index(caption_2), )
     caption_3 = list_dict_physics[random.randint(0, len(dict_physics) - 3)]
-    formula_3 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption_3)))
+    formula_3 = Image.open(dict_physics.get(caption_3))
     image.paste(formula_3, (150, list_y_pos[2]), formula_3)
 
     caption_4 = list_dict_physics.pop(list_dict_physics.index(caption_3))
     caption_4 = list_dict_physics[random.randint(0, len(dict_physics) - 4)]
-    formula_4 = Image.open(urlopen('https://raw.githubusercontent.com/MCDUCK7447/BOTHELPER/main/%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/' + dict_physics.get(caption_4)))
+    formula_4 = Image.open(dict_physics.get(caption_4))
     image.paste(formula_4, (150, list_y_pos[3]), formula_4)
 
     picture = io.BytesIO()
