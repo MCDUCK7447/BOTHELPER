@@ -7,13 +7,12 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 from PIL import Image
-import urllib
+
 from urllib.request import urlopen
 
 
 import random
 import io
-from io import BytesIO
 
 from UserData import User_Data as UD
 import markups as marks
@@ -25,13 +24,9 @@ storage = MemoryStorage()
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=storage)
 
-# --- Класс FSM ФИЗИКА ---
-class FSM_subject_phys(StatesGroup):
-    answer_phys = State()
-
-# --- Класс FSM ХИМИЯ ---
-class FSM_subject_chem(StatesGroup):
-    answer_chem = State()
+# --- Класс FSM ---
+class FSM_subject(StatesGroup):
+    answer = State()
 
 # --- Генерация Основного Меню ---
 def get_Main_Menu():
@@ -147,21 +142,21 @@ def get_chem_picture(call):
     photo_png = picture.getvalue()
 
 # --- Проверка ответа по ФИЗИКЕ ---
-@dp.message_handler(state=FSM_subject_phys.answer_phys)
+@dp.message_handler(state=FSM_subject.answer)
 async def check_answers(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['answer_phys'] = message.text
-        if data['answer_phys'] == '1️⃣':
+        data['answer'] = message.text
+        if data['answer'] == '1️⃣':
             y = 1
-        elif data['answer_phys'] == '2️⃣':
+        elif data['answer'] == '2️⃣':
             y = 2
-        elif data['answer_phys'] == '3️⃣':
+        elif data['answer'] == '3️⃣':
             y = 3
-        elif data['answer_phys'] == '4️⃣':
+        elif data['answer'] == '4️⃣':
             y = 4
-        elif data['answer_phys'] == 'Отмена':
+        elif data['answer'] == 'Отмена':
             y = 'Отмена'
-        elif data['answer_phys'] == 'Показать ответ':
+        elif data['answer'] == 'Показать ответ':
             y = 'Показать ответ'
     if y == UD.get(message.from_user.id):
         await bot.send_message(message.from_user.id, 'Правильно!', reply_markup=marks.Inline_after_answer_phys
@@ -178,21 +173,21 @@ async def check_answers(message: types.Message, state: FSMContext):
     await state.finish()
 
 # --- Проверка ответа по ХИМИИ ---
-@dp.message_handler(state=FSM_subject_chem.answer_chem)
+@dp.message_handler(state=FSM_subject.answer)
 async def check_answers(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['answer_chem'] = message.text
-        if data['answer_chem'] == '1️⃣':
+        data['answer'] = message.text
+        if data['answer'] == '1️⃣':
             y = 1
-        elif data['answer_chem'] == '2️⃣':
+        elif data['answer'] == '2️⃣':
             y = 2
-        elif data['answer_chem'] == '3️⃣':
+        elif data['answer'] == '3️⃣':
             y = 3
-        elif data['answer_chem'] == '4️⃣':
+        elif data['answer'] == '4️⃣':
             y = 4
-        elif data['answer_chem'] == 'Отмена':
+        elif data['answer'] == 'Отмена':
             y = 'Отмена'
-        elif data['answer_chem'] == 'Показать ответ':
+        elif data['answer'] == 'Показать ответ':
             y = 'Показать ответ'
     if y == UD.get(message.from_user.id):
         await bot.send_message(message.from_user.id,
@@ -257,7 +252,7 @@ async def Menu_commands(call: types.callback_query):
     elif call.data == "Физика":
         get_physics_picture(call)
 
-        await FSM_subject_phys.answer_phys.set()
+        await FSM_subject.answer.set()
         await call.message.answer('Выберите вариант ответа')
 
         await bot.send_photo(call.from_user.id, photo_png, caption, reply_markup=marks.Answers_choose)
@@ -266,7 +261,7 @@ async def Menu_commands(call: types.callback_query):
     elif call.data == 'Химия':
         get_chem_picture(call)
 
-        await FSM_subject_chem.answer_chem.set()
+        await FSM_subject.answer.set()
         await call.message.answer('Выберите вариант ответа')
 
         await bot.send_photo(call.from_user.id, photo_png, caption, reply_markup=marks.Answers_choose)
