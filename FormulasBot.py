@@ -22,6 +22,8 @@ from urllib.request import urlopen
 import random
 # io - для бинарного вывода
 import io
+# Модуль функций и операций высшего порядка
+import functools
 
 # --- Импортируем содержимое других файлов (Структуризация проекта): ---
 # Импортируем словарь для хранения данных о пользователе, как "UD"
@@ -74,6 +76,17 @@ def get_Choose_Subject_Menu():
     return Subject_Menu
 
 
+# --- Читаем ссылку на шрифт: ---
+@functools.lru_cache()
+def get_font_from_url(font_url):
+    return urllib.request.urlopen(font_url).read()
+
+
+# --- Сохраняем шрифт как бинарную строку: ---
+def webfont(font_url):
+    return io.BytesIO(get_font_from_url(font_url))
+
+
 # --- Генерация изображения по ФИЗИКЕ (передаём аргумент Inline кнопки) (*): ---
 def get_physics_picture(call):
     # Создаём список позиций формул по оси Ординат
@@ -101,16 +114,14 @@ def get_physics_picture(call):
     # Создаём список из ключей (Вопросов) словаря
     list_dict_physics = list(dict_physics)
 
-    # Создаём переменную шрифта (Название шрифта, размер)
-    font = ImageFont.truetype(f, 60)
     # Создаём переменную позволяющую "рисовать" на фоновом изображении
     Image_Put_Text = ImageDraw.Draw(image)
 
     # Распологаем цифры (x; y)
-    Image_Put_Text.text((50, 100), "1)", font=font, fill='black')
-    Image_Put_Text.text((50, 350), "2)", font=font, fill='black')
-    Image_Put_Text.text((50, 550), "3)", font=font, fill='black')
-    Image_Put_Text.text((50, 790), "4)", font=font, fill='black')
+    Image_Put_Text.text((50, 100), "1)", font=image_font, fill='black')
+    Image_Put_Text.text((50, 350), "2)", font=image_font, fill='black')
+    Image_Put_Text.text((50, 550), "3)", font=image_font, fill='black')
+    Image_Put_Text.text((50, 790), "4)", font=image_font, fill='black')
 
     # Объявляем переменную Глобальной, для возможности использования во всём коде
     global caption
@@ -177,16 +188,14 @@ def get_chem_picture(call):
     # --- Создаём список из ключей (Вопросов) словаря ---
     list_dict_chem = list(dict_chem)
 
-    # Создаём переменную шрифта (Название шрифта, размер)
-    font = ImageFont.truetype('arial.ttf', 60)
     # Создаём переменную позволяющую "рисовать" на фоновом изображении
     Image_Put_Text = ImageDraw.Draw(image)
 
     # Распологаем цифры (x; y)
-    Image_Put_Text.text((50, 100), "1)", font=font, fill='black')
-    Image_Put_Text.text((50, 350), "2)", font=font, fill='black')
-    Image_Put_Text.text((50, 550), "3)", font=font, fill='black')
-    Image_Put_Text.text((50, 790), "4)", font=font, fill='black')
+    Image_Put_Text.text((50, 100), "1)", font=image_font, fill='black')
+    Image_Put_Text.text((50, 350), "2)", font=image_font, fill='black')
+    Image_Put_Text.text((50, 550), "3)", font=image_font, fill='black')
+    Image_Put_Text.text((50, 790), "4)", font=image_font, fill='black')
 
     global caption
 
@@ -414,10 +423,18 @@ async def Menu_commands(call: types.callback_query):
                                  call.message.message_id
                                  )
 
+
+
 # --- Запускаем принятие сообщений: ---
 # Если код находится внутри исполняемого файла, то
 # Запускаем постоянный опрос сервера Telegram на наличие обновлений
 if __name__ == '__main__':
+    # Передаём ссылку на шрифт
+    font_url = "https://github.com/MCDUCK7447/BOTHELPER/blob/main/arial.ttf?raw=true"
+    # Открываем шрифт как f с помощью функции
+    with webfont(font_url) as f:
+        # Сохраняем шрифт
+        image_font = ImageFont.truetype(f, 60)
     # skip_updater=True позволяет "проигнорировать накопившиеся необработанные сообщения
     # Наприме, при перезагрузке Бота
     executor.start_polling(dp, skip_updates=True)
