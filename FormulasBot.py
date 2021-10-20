@@ -101,9 +101,8 @@ def get_physics_picture(call):
     # Создаём список из ключей (Вопросов) словаря
     list_dict_physics = list(dict_physics)
 
-    font_path = "arial.ttf"
     # Создаём переменную шрифта (Название шрифта, размер)
-    font = ImageFont.truetype(font_path, 60)
+    font = ImageFont.truetype(f, 60)
     # Создаём переменную позволяющую "рисовать" на фоновом изображении
     Image_Put_Text = ImageDraw.Draw(image)
 
