@@ -11,8 +11,8 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 # Импортируем executor нужен для постоянной работы бота (Поллинга))
 from aiogram.utils import executor
-# Импортируем из библиотеки Pillow модуль Image (для создания и работы с изображениями)
-from PIL import Image
+# Импортируем из библиотеки Pillow модули Image* (для создания и работы с изображениями)
+from PIL import Image, ImageDraw, ImageFont
 # Импортируем метод urlopen для работы с изображениями из Интернета
 import urllib
 from urllib.request import urlopen
@@ -101,6 +101,17 @@ def get_physics_picture(call):
     # Создаём список из ключей (Вопросов) словаря
     list_dict_physics = list(dict_physics)
 
+    # Создаём переменную шрифта (Название шрифта, размер)
+    font = ImageFont.truetype('arial.ttf', 60)
+    # Создаём переменную позволяющую "рисовать" на фоновом изображении
+    Image_Put_Text = ImageDraw.Draw(image)
+
+    # Распологаем цифры (x; y)
+    Image_Put_Text.text((50, 100), "1)", font=font, fill='black')
+    Image_Put_Text.text((50, 350), "2)", font=font, fill='black')
+    Image_Put_Text.text((50, 550), "3)", font=font, fill='black')
+    Image_Put_Text.text((50, 790), "4)", font=font, fill='black')
+
     # Объявляем переменную Глобальной, для возможности использования во всём коде
     global caption
 
@@ -166,6 +177,17 @@ def get_chem_picture(call):
     # --- Создаём список из ключей (Вопросов) словаря ---
     list_dict_chem = list(dict_chem)
 
+    # Создаём переменную шрифта (Название шрифта, размер)
+    font = ImageFont.truetype('arial.ttf', 60)
+    # Создаём переменную позволяющую "рисовать" на фоновом изображении
+    Image_Put_Text = ImageDraw.Draw(image)
+
+    # Распологаем цифры (x; y)
+    Image_Put_Text.text((50, 100), "1)", font=font, fill='black')
+    Image_Put_Text.text((50, 350), "2)", font=font, fill='black')
+    Image_Put_Text.text((50, 550), "3)", font=font, fill='black')
+    Image_Put_Text.text((50, 790), "4)", font=font, fill='black')
+
     global caption
 
     # --- Caption - вопрос из списка ---
@@ -193,6 +215,7 @@ def get_chem_picture(call):
     global photo_png
     photo_png = picture.getvalue()
 
+
 # --- Проверка ответа по ФИЗИКЕ: (***) ---
 # Декоратор текстовых сообщений (Вызывается лишь из полученного состояния)
 @dp.message_handler(state=FSM_subject.answer)
@@ -219,8 +242,9 @@ async def check_answers(message: types.Message, state: FSMContext):
         # Отправляем текстовое сообщение (Кому, Текст, Inline клавиатура)
         await bot.send_message(message.from_user.id,
                                'Правильно✅',
-                               reply_markup=marks.Inline_after_answer_phys
+                               reply_markup=marks.Inline_after_answer_phys,
                                )
+
     elif y == 'Отмена❌':
         # Отправляем текстовое сообщение (Кому, Текст, убираем Reply клавиатуру)
         await bot.send_message(message.from_user.id,
@@ -316,6 +340,7 @@ async def command_start(message: types.Message):
 @dp.message_handler(content_types='Отмена❌', state="*")
 async def cancel_handler(message: types.Message, state: FSMContext):
     await state.finish()
+
 
 # --- Декоратор callback ответов (При нажатии Inline кнопки): ---
 @dp.callback_query_handler()
