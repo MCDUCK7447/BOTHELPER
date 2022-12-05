@@ -32,16 +32,13 @@ from UserData import User_Data as UD
 import markups as marks
 # Импортируем словари с Вопросами и ответами
 from SubjectFormulas import dict_physics, dict_chem
-# Импортируем Токен (В качестве минимальных мер безопасности
-# Лучше хранить Токен в другом файле или в качестве Виртуальной переменной)
-from settings import TOKEN
 
 # --- Присваивание переменной объекта хранилища ---
 storage = MemoryStorage()
 
 # --- Добавление Бота: ---
 # Присваиваем Боту наш Токен
-bot = Bot(token=TOKEN)
+bot = Bot(token=2062151739:AAH7m3ZVNhBljSYNzIPXfBreAQ_n3ry6Mlk)
 # Передаём Бота, объект хранилища в параметр storage
 dp = Dispatcher(bot, storage=storage)
 
